@@ -1,0 +1,1 @@
+/home/clob/.config/kitty/neighboring_window.py

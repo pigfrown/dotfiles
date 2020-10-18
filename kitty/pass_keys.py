@@ -1,0 +1,1 @@
+/home/clob/.config/kitty/pass_keys.py
