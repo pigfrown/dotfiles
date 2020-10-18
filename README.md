@@ -5,12 +5,21 @@ Useful config files
 
 ## Vim
 
-After installing vimrc, run :PluginInstall
+Install Vundle with
 
-Requires linters to be installed for ALE.
+```
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
 
+Copy vimrc to ~/.vim/vimrc or ~/.vimrc
+
+Open vim, run :PluginInstall
+ 
+### Requirements
+
+Requires linters (pylint, flake8, prospector) to be installed for ALE.
+Requires pyls and pyright LPS to be installed for ALE
 Requires terminal to be using a nerd font for fancy icons
-
 
 ## Kitty
 
