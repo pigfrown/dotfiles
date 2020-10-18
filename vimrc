@@ -143,7 +143,8 @@ nmap <leader>h :bprevious<CR> " Move to previous buffer
 " This is equivalent to closing a tab
 nmap <leader>bq :bp <BAR> bd #<CR> 
 
-nmap <leader>bl :ls<CR> " Show all open buffers and their status
+" Using buffergator instead
+" nmap <leader>bl :ls<CR> " Show all open buffers and their status
 
 " Generic Python Stuff ----
 " enable syntax highlighting
