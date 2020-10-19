@@ -75,6 +75,12 @@ let g:airline_symbols.paste     = 'Þ'
 let g:airline_symbols.paste     = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+" UltiSnip stuff
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
 
 " CTRL-P Stuff
 
@@ -217,6 +223,14 @@ Plugin 'ryanoasis/vim-devicons' " filetype fonts. Needs nerdfonts/terminal font 
 Plugin 'frazrepo/vim-rainbow' " colour match brackets
 
 Plugin 'jmcantrell/vim-virtualenv' " Handle virtualenvs 
+
+Plugin 'sheerun/vim-polyglot' " syntax/indent for _every_ language
+
+Plugin 'SirVer/ultisnips' " create/edit/use snippets
+
+Plugin 'honza/vim-snippets' " Pre made snippets 
+
+Plugin 'tweekmonster/django-plus.vim' " django file types/completions/snippets
 
 call vundle#end()
 
