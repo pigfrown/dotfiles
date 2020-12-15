@@ -14,6 +14,9 @@ set ttymouse=xterm2
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
 
+" Ale peformance
+let g:ale_cache_executable_check_failures = 1
+
 let g:ale_fixers = {
 \                   'javascript': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
 \                   'css': ['prettier'],
@@ -21,9 +24,31 @@ let g:ale_fixers = {
 \                   }
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
 
+" Would like to use prospector/pyls too but it seems to slow down things a little
+" TODO quantify this. 
+" TODO get pylint-django involved somehow
+" TODO do we really need both pyright and pyls
 let g:ale_linters = {
-                    \'python': ['flake8', 'mypy', 'pylint', 'pyright', 'pyls', 'prospector']
+                    \'python': ['flake8', 'mypy', 'pylint', 'pyright'],
+                    \'solidity': ['solhint', 'solium']
                     \}
+
+" Explicitly set paths to avoid expensive lookups (performance)
+
+let g:ale_python_flake8_executable = '/usr/bin/flake8'
+let g:ale_python_flake8_use_global = 1
+let g:ale_python_mypy_executable = '/usr/bin/mypy'
+let g:ale_python_mypy_use_global = 1
+let g:ale_python_pylint_executable = '/usr/bin/pylint'
+let g:ale_python_pylint_use_global = 1
+let g:ale_python_pyright_executable = '/usr/bin/pyright'
+let g:ale_python_pyright_use_global = 1
+
+" Assuming npm is configured to install in ~/.npm/packages
+let g:ale_solidity_solhint_executable = '~/.npm/packages/bin/solhint'
+let g:ale_solidity_solhint_use_global = 1
+let g:ale_solidity_solium_executable = '~/.npm/packages/bin/solium'
+let g:ale_solidity_solium_use_global = 1
 
 let g:ale_set_balloons=1
 let g:ale_fix_on_save = 1
@@ -36,13 +61,14 @@ nmap gd :ALEGoToDefinition<CR> " Move to the definition
 nmap gn :ALENext<CR>  " Move to the next error
 
 " Vim test stuff
-nmap <silent> t<C-n> :TestNearest<CR> "Test individual test
-nmap <silent> t<C-f> :TestFile<CR> " Test active file
+"
+nmap <silent> tt :TestFile<CR> " Test active file
+nmap <silent> tn :TestNearest<CR> "Test nearest to cursor
 nmap <silent> t<C-s> :TestSuite<CR> " Test everything
-nmap <silent> t<C-l> :TestLast<CR> " run last test
+nmap <silent> tl :TestLast<CR> " run last test
 nmap <silent> t<C-g> :TestVisit<CR>" run last test in buffer
 
-let test#strategy = "vimterminal"
+let test#strategy = "asyncrun_background"
 
 " Airline config
 
@@ -184,6 +210,10 @@ let python_highlight_all = 1
 
 "End Python Stuf ----
 "
+
+"Solidity stuff
+autocmd FileType solidity setlocal shiftwidth=4 tabstop=4 
+
 " Vundle stuff going at the end 
 "VUNDLE STUFF =====
 set nocompatible              " be iMproved, required
@@ -197,6 +227,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'skywind3000/asyncrun.vim' "AsyncRun command for vim-test/fugitive
 
 Plugin 'https://github.com/w0rp/ale.git' " ALE linting/autocomplete.. needs appropriate LPS/linters installed
 
