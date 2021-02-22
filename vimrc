@@ -32,10 +32,13 @@ let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
 " TODO do we really need both pyright and pyls
 let g:ale_linters = {
                     \'python': ['pyls', 'flake8', 'mypy', 'pylint', 'pyright'],
-                    \'solidity': ['solhint', 'solium']
+                    \'solidity': ['solhint', 'solium'],
+                    \'go': ['golangserver'],
                     \}
 
 " Explicitly set paths to avoid expensive lookups (performance)
+
+let g:ale_go_langserver_executable = '~/go/bin/go-langserver'
 
 let g:ale_python_flake8_executable = '/usr/bin/flake8'
 let g:ale_python_flake8_use_global = 1
@@ -219,24 +222,12 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " Using buffergator instead
 " nmap <leader>bl :ls<CR> " Show all open buffers and their status
 
-" Generic Python Stuff ----
-" enable syntax highlighting
-syntax enable
-
+" " GENERIC STUFF
 " show line numbers
 set number
 
-" set tabs to have 4 spaces
-set ts=4
-
-" indent when moving to the next line while writing code
-set autoindent
-
-" expand tabs into spaces
-set expandtab
-
-" when using the >> or << commands, shift lines by 4 spaces
-set shiftwidth=4
+" enable syntax highlighting
+syntax enable
 
 " show a visual line under the cursor's current line
 set cursorline
@@ -244,19 +235,27 @@ set cursorline
 " show the matching part of the pair for [] {} and ()
 set showmatch
 
+" fold with indent
 set foldmethod=indent
 
+" PYTHON STUFF
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
 
-"End Python Stuf ----
-"
+" keep indentation of multiline strings
+let g:python_pep8_indent_multiline_string=-1
+
+" Make closing hanging brackets line up items enclosed
+let g:python_pep8_indent_hang_closing=1
+
+
 
 "Solidity stuff
 autocmd FileType solidity setlocal shiftwidth=4 tabstop=4 
 
 " Vundle stuff going at the end 
 "VUNDLE STUFF =====
+"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -306,6 +305,24 @@ Plugin 'honza/vim-snippets' " Pre made snippets
 Plugin 'tweekmonster/django-plus.vim' " django file types/completions/snippets
 
 Plugin 'terryma/vim-expand-region' " select expanding text blocks with one key
+
+Plugin 'jceb/vim-orgmode' " todo/project management for vim
+
+Plugin 'Vimjas/vim-python-pep8-indent' "python indentation
+
+" go plugins
+
+" TODO fix this so it works properly outside GOPATH
+Plugin 'fatih/vim-go' " vim-go
+
+" PLUGINS FOR ORGMODE
+
+Plugin 'tpope/vim-speeddating' " increment/decrement dates
+
+Plugin 'tpope/vim-repeat' " repeat actions that aren't normally repeatable
+
+Plugin 'mattn/calendar-vim' " calender widget for vim
+
 
 call vundle#end()
 
